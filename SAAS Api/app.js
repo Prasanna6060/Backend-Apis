@@ -3,8 +3,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+
 
 
 import userRoutes from "./routes/User.route.js";
@@ -16,9 +15,7 @@ import signoutRoute from './routes/Signout.Route.js';
 import {app, server } from './socketio.js';
 import locationRoutes from './routes/Location.route.js';
 
-// Define __dirname and __filename
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
 
 const Port = process.env.PORT || 3000;
 
@@ -53,16 +50,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/signout', signoutRoute);
 app.use('/api', locationRoutes);
 
-// Serve static files from the dist folder
-app.use(express.static(join(__dirname, 'dist')));
 
-// Handle client-side routing by serving the index.html for all non-API routes
-app.get('*', (req, res) => {
-  if (req.path.startsWith('/api')) {
-    return; // Let API routes be handled by the API
-  }
-  res.sendFile(join(__dirname, 'dist', 'index.html'));
-});
 
 // Health check route
 app.get('/health', (req, res) => {
