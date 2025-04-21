@@ -21,6 +21,15 @@ SAAS APi is an online platform that connects users with service professionals li
 - **Cloudinary** - Image and file storage
 - **Mongoose** - MongoDB ORM for managing schema and data
 
+## Rate Limiting
+
+To protect against **brute-force login attacks**, the backend implements **rate limiting** on the login API using the `express-rate-limit` middleware. This ensures that after a certain number of failed login attempts, further login attempts from the same IP address are temporarily blocked, making it harder for attackers to guess passwords.
+
+For example:
+- A user is allowed up to **5 failed login attempts** within **15 minutes**.
+- After this limit is reached, further login attempts will be blocked for **15 minutes**.
+
+This rate limiting helps ensure the security and stability of the platform.
 
 ## Installation
 
@@ -35,4 +44,4 @@ SAAS APi is an online platform that connects users with service professionals li
 1. Clone the repo:
 
    ```bash
-   git clone 
+   git clone https://github.com/Prasanna6060/Backend-Apis.git
